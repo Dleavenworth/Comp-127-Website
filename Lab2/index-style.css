@@ -1,9 +1,9 @@
-.red-text {
+h2 {
   color:red;
   font-family: Georgia
 }
 
-.blue-text {
+h1 {
   color: blue;
   font-weight: 100;
 }
