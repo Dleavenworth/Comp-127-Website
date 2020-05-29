@@ -5,6 +5,6 @@
     <title></title>
   </head>
   <body>
-    <h1>PHP says: <?=echo "Hello World"?><h1>
+Hello, today is <?php echo date('l, F jS, Y'); ?>.
   </body>
 </html>
