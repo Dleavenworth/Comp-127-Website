@@ -19,12 +19,15 @@ body {
 
 .projects {
   border: 2px green dashed;
+  padding: 70px;
 }
 
 .interests {
   border: 3px brown solid;
+  padding: 70px;
 }
 
 .interesting {
   border: 3px orange dashed;
+  padding: 70px;
 }
