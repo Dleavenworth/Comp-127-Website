@@ -5,6 +5,6 @@
     <title></title>
   </head>
   <body>
-Hello, today is <?php echo date('l, F jS, Y'); ?>.
+<h1><?php echo date('F, Y'); ?>.<h1>
   </body>
 </html>

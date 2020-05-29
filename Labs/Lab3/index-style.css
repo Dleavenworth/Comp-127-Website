@@ -1,0 +1,29 @@
+h2 {
+  color:red;
+  font-family: Georgia
+}
+
+h1 {
+  color: blue;
+  font-weight: 100;
+}
+
+body {
+  text-align: center;
+}
+
+.courses {
+  border: 1px red solid;
+}
+
+.projects {
+  border: 2px green dashed;
+}
+
+.interests {
+  border: 3px brown solid;
+}
+
+.interesting {
+  border: 3px orange dashed;
+}
