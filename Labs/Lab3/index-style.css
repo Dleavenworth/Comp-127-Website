@@ -54,7 +54,7 @@ body {
 }
 
 .content {
-  clear: none;
+  clear: both;
 }
 
 .mypic {
