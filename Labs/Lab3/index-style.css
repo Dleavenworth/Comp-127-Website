@@ -25,28 +25,28 @@ body {
 }
 
 .courses {
-  border: 1px red solid;
+  border: 4px white solid;
   padding: 70px;
   margin-left: 10%;
   margin-right: 10%;
 }
 
 .projects {
-  border: 2px green dashed;
+  border: 4px black dashed;
   padding: 70px;
   margin-left: 10%;
   margin-right: 10%;
 }
 
 .interests {
-  border: 3px brown solid;
+  border: 4px white solid;
   padding: 70px;
   margin-left: 10%;
   margin-right: 10%;
 }
 
 #interesting {
-  border: 3px orange dashed;
+  border: 4px black dashed;
   padding: 70px;
   margin-left: 10%;
   margin-right: 10%;
