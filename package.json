@@ -1,0 +1,29 @@
+{
+  "name": "musicplayer",
+  "version": "1.0.0",
+  "description": "NoSQL music player",
+  "main": "index.js",
+  "dependencies": {
+    "@types/express": "^4.17.6",
+    "@types/mongodb": "^3.5.18",
+    "@types/multer": "^1.4.3",
+    "express": "^4.17.1",
+    "gridfs-stream": "^1.1.1",
+    "mongodb": "^3.5.7",
+    "multer": "^1.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dleavenworth/Comp-127-Website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dleavenworth/Comp-127-Website/issues"
+  },
+  "homepage": "https://github.com/Dleavenworth/Comp-127-Website#readme"
+}
