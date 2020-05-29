@@ -45,7 +45,7 @@ body {
   margin-right: 10%;
 }
 
-#interesting {
+.interesting {
   border: 4px black dashed;
   padding: 70px;
   margin-left: 10%;
