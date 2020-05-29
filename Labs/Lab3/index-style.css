@@ -15,19 +15,27 @@ body {
 .courses {
   border: 1px red solid;
   padding: 70px;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .projects {
   border: 2px green dashed;
   padding: 70px;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .interests {
   border: 3px brown solid;
   padding: 70px;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .interesting {
   border: 3px orange dashed;
   padding: 70px;
+  margin-left: 10%;
+  margin-right: 10%;
 }
