@@ -25,7 +25,7 @@ body {
 }
 
 .courses {
-  float: left;
+  /*float: left;*/
   border: 1px red solid;
   padding: 70px;
   margin-left: 10%;
