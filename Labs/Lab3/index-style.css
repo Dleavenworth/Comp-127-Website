@@ -10,7 +10,18 @@ h1 {
 
 body {
   text-align: center;
-  background-image: url(https://authentic-scandinavia.com/themes/fjord-tours/_/image/f435023b-a3d3-4aeb-b666-abd2669e45af:914554f6ea7f29f36b7064189bef9ec8263b5582/width-1140/FT_-_Næroyfjorden_-_fjord_norway_-_Katrin_Moe_-_SMALL.jpg)
+  height: 100%;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+   background: #70bg32;
+   background-repeat:no-repeat;
+   background: -webkit-linear-gradient( to left top, blue, red);
+   background: -moz-linear-gradient( to left top, blue, red);
+   background: -ms-linear-gradient( to left top, blue, red);
+   background: -o-linear-gradient( to left top, blue, red);
+   background: linear-gradient( to left top, blue, red);
 }
 
 .courses {
