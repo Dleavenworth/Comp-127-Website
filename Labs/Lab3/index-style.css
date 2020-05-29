@@ -14,6 +14,7 @@ body {
 
 .courses {
   border: 1px red solid;
+  padding: 70px;
 }
 
 .projects {
