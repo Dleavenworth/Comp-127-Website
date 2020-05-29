@@ -53,8 +53,8 @@ body {
   margin-right: 10%;
 }
 
-.shift {
-  /*clear: left;*/
+.content {
+  clear: none;
 }
 
 .mypic {
