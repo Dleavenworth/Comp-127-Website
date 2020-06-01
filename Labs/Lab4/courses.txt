@@ -1,0 +1,13 @@
+<li>COMP-53 - Data Structures</li>
+<li>MATH-43- Pre-calculus</li>
+<li>PACS-1 - What is a good society?</li>
+<li>ENGR-10 - Deans seminar</li>
+<li>COMP-47 - Discrete Math</li>
+<li>COMP-55 - Application Development</li>
+<li>COMP-144 - Programming Languages</li>
+<li>ECON-053 - Introductory Microeconomics</li>
+<li>ECPE-071 - Digital Design</li>
+<li>HIST-030 - East Asian Civilization 1</li>
+<li>COMP-163 - Database Management Systems</li>
+<li>ECON-55 - Introductory Macroeconomics</li>
+<li>GESC-051 - Dynamic Planet</li>
