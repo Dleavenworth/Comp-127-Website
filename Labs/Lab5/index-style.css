@@ -1,0 +1,77 @@
+h2 {
+  color:red;
+  font-family: Georgia
+}
+
+h1 {
+  color: blue;
+  font-weight: 100;
+}
+
+body {
+  text-align: center;
+  height: 100%;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+   background: #72bg30;
+   background-repeat:no-repeat;
+   background: -webkit-linear-gradient( to left top, blue, red);
+   background: -moz-linear-gradient( to left top, blue, red);
+   background: -ms-linear-gradient( to left top, blue, red);
+   background: -o-linear-gradient( to left top, blue, red);
+   background: linear-gradient( to left top, blue, red);
+}
+
+.courses {
+  border: 4px white solid;
+  padding: 70px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.projects {
+  border: 4px black dashed;
+  padding: 70px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.interests {
+  border: 4px white solid;
+  padding: 70px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.interesting {
+  border: 4px black dashed;
+  padding: 70px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.content {
+  clear: both;
+}
+
+.mypic {
+  float: left;
+}
+
+.phpthings {
+    border: 4px white dashed;
+    padding: 70px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.calendar {
+    margin-left: 45%;
+    margin-right: 45%;
+}
+
+.files {
+    list-style: none;
+}
