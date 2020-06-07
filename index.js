@@ -15,14 +15,26 @@ const { Readable } = require('stream')
 
 //Create express server and express router config
 const app = express();
+app.use(express.static(__dirname + '/public'));
 app.use('/audio', audioRoute)
+app.set('view engine', 'ejs')
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname + '/index.html'));
+     db.collection("Songs").find({}).project({"SongName": 1, "Artist": 1, "Length": 1}).toArray(function(err, result) {
+         if (err) {throw err}
+         console.log(result)
+         res.render('index.ejs', {
+             songs: result
+         });
+     })
 });
+app.get('/upload', function(req, res) {
+    res.render('upload.ejs')
+})
 
 //Mongo config
-//let config = require('config.json').password
-const uri = "mongodb+srv://admin:hihi@comp127musicplayer.lfnoa.mongodb.net/test?retryWrites=true&w=majority";
+let config = require('./config.json')
+let pass = config.password;
+const uri = "mongodb+srv://admin:" + pass + "@comp127musicplayer.lfnoa.mongodb.net/test?retryWrites=true&w=majority";
 
 // Connect Mongo Driver to MongoDB
 
@@ -57,7 +69,7 @@ audioRoute.get('/:songID', (req, res) => {
   });
 
   downloadStream.on('error', () => {
-    res.sendStats(404);
+    res.sendStatus(404);
   })
 
   downloadStream.on('end', () => {
@@ -66,7 +78,7 @@ audioRoute.get('/:songID', (req, res) => {
 });
 
 /**
- * POST /tracks
+ * POST /songs
  */
 audioRoute.post('/', (req, res) => {
   const storage = multer.memoryStorage()
