@@ -4,7 +4,6 @@ const audioRoute = express.Router();
 const indexRoute = express.Router();
 const multer = require('multer');
 const path = require('path')
-
 const mongodb = require('mongodb');
 const MongoClient=require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
@@ -15,6 +14,10 @@ const { Readable } = require('stream')
 
 //Create express server and express router config
 const app = express();
+app.use(express.json())
+app.use(express.urlencoded({
+    extended: true
+}))
 app.use(express.static(__dirname + '/public'));
 app.use('/audio', audioRoute)
 app.set('view engine', 'ejs')
@@ -80,14 +83,19 @@ audioRoute.get('/:songID', (req, res) => {
 /**
  * POST /songs
  */
-audioRoute.post('/', (req, res) => {
-  const storage = multer.memoryStorage()
-  const upload = multer({ storage: storage, limits: { fields: 1, fileSize: 6000000, files: 1, parts: 2 }});
-  upload.single('song')(req, res, (err) => {
+audioRoute.post('/add', (req, res) => {
+    console.log("in audioRoute post handler")
+    const storage = multer.memoryStorage()
+    const upload = multer({ storage: storage, limits: { fieldSize: 20000000, fileSize: 20000000, files: 1, parts: 2 }});
+    upload.single('song')(req, res, (err) => {
+      console.log(req)
+      console.log(err)
     if (err) {
-      return res.status(400).json({ message: "Upload Request Validation Failed" });
-    } else if(!req.body.name) {
-      return res.status(400).json({ message: "No track name in request body" });
+        console.log("Upload Request Validation Failed")
+        return res.status(400).json({ message: "Upload Request Validation Failed" });
+    }   else if(!req.body.name) {
+        console.log("No track name in request body")
+        return res.status(400).json({ message: "No track name in request body" });
     }
 
     let songName = req.body.name;
@@ -110,6 +118,7 @@ audioRoute.post('/', (req, res) => {
     });
 
     uploadStream.on('finish', () => {
+        console.log("Stored under ID: " + id)
       return res.status(201).json({ message: "File uploaded successfully, stored under Mongo ObjectID: " + id });
     });
   });

@@ -11,12 +11,9 @@
         <%- include('./partials/sidebar.ejs')%>
         <main>
         <div class="row">
-          <form class="col s12">
+          <form enctype="multipart/form-data" class="col s12">
             <div class="row">
-              <div class="input-field col s6">
-                <input id="song_title" type="text" class="validate">
-                <label for="song_title">Song title</label>
-              </div>
+
               <div class="input-field col s6">
                 <input id="artist" type="text" class="validate">
                 <label for="artist">Artist</label>
@@ -32,24 +29,29 @@
                 <label for="length">Length</label>
             </div>
             </div>
+        </form>
+
+            <form method="post" enctype="multipart/form-data" action="/audio/add">
             <div class="row">
-                <div class="file-field input-field col s12">
+                <div class="file-field input-field col s16">
                     <div class="btn col">
                         <span>Choose file</span>
-                        <input id="file" type="file">
+                        <input id="file" type="file" name="song">
                     </div>
                     <div class="file-path-wrapper">
                         <input class="file-path validate" type="text">
                     </div>
                 </div>
-                </div>
+                <div class="input-field col s6">
+                    <input type="text" name="name" class="validate">
+                    <label for="name">Song title</label>
+            </div>
+                <input id="submit_file" type="submit" value="Upload" class="waves-effect waves-light btn"><input>
             </form>
         </div>
-        <a id="submit_file" class="waves-effect waves-light btn">Submit</a>
     </main>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script src="/js/upload.js"></script>
-        <script src="/js/bundle.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var elems = document.querySelectorAll('.sidenav');
