@@ -7,6 +7,7 @@ const path = require('path')
 const mongodb = require('mongodb');
 const MongoClient=require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
+const assert = require('assert');
 
 //NodeJS Module Dependencies
 const { Readable } = require('stream')
@@ -22,7 +23,7 @@ app.use(express.static(__dirname + '/public'));
 app.use('/audio', audioRoute)
 app.set('view engine', 'ejs')
 app.get('/', function(req, res) {
-     db.collection("Songs").find({}).project({"SongName": 1, "Artist": 1, "Length": 1}).toArray(function(err, result) {
+     db.collection("Songs").find({}).toArray(function(err, result) {
          if (err) {throw err}
          console.log(result)
          res.render('index.ejs', {
@@ -42,7 +43,7 @@ const uri = "mongodb+srv://admin:" + pass + "@comp127musicplayer.lfnoa.mongodb.n
 // Connect Mongo Driver to MongoDB
 
 let db;
-MongoClient.connect(uri, (err, client) => {
+MongoClient.connect(uri, {useUnifiedTopology: true}, (err, client) => {
   if (err) {
     console.log('MongoDB connection error. Please check the connection string or DB.')
     process.exit(1);
@@ -86,7 +87,7 @@ audioRoute.get('/:songID', (req, res) => {
 audioRoute.post('/add', (req, res) => {
     console.log("in audioRoute post handler")
     const storage = multer.memoryStorage()
-    const upload = multer({ storage: storage, limits: { fieldSize: 20000000, fileSize: 20000000, files: 1, parts: 2 }});
+    const upload = multer({ storage: storage, limits: { fieldSize: 20000000, fileSize: 20000000, files: 1}});
     upload.single('song')(req, res, (err) => {
       console.log(req)
       console.log(err)
@@ -99,6 +100,13 @@ audioRoute.post('/add', (req, res) => {
     }
 
     let songName = req.body.name;
+    let artist = req.body.artist;
+    let album = req.body.album;
+    let length = req.body.length;
+
+    db.collection('Songs').insertOne({"SongName": songName, "Artist": artist, "Album": album, "Length": length}, function(err) {
+        assert.equal(null, err);
+    })
 
     // Covert buffer to Readable Stream
     const readableTrackStream = new Readable();

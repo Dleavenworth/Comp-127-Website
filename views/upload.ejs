@@ -11,27 +11,27 @@
         <%- include('./partials/sidebar.ejs')%>
         <main>
         <div class="row">
-          <form enctype="multipart/form-data" class="col s12">
+            <form method="post" enctype="multipart/form-data" action="/audio/add">
             <div class="row">
-
+                <div class="input-field col s6">
+                    <input type="text" name="name" class="validate">
+                    <label for="name">Song title</label>
+            </div>
               <div class="input-field col s6">
-                <input id="artist" type="text" class="validate">
+                <input name="artist" id="artist" type="text" class="validate">
                 <label for="artist">Artist</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s6">
-                <input id="album" type="text" class="validate">
+                <input name="album" id="album" type="text" class="validate">
                 <label for="album">Album</label>
               </div>
               <div class="input-field col s6">
-                <input id="length" type="text" class="validate">
+                <input name="length" id="length" type="text" class="validate">
                 <label for="length">Length</label>
             </div>
             </div>
-        </form>
-
-            <form method="post" enctype="multipart/form-data" action="/audio/add">
             <div class="row">
                 <div class="file-field input-field col s16">
                     <div class="btn col">
@@ -42,10 +42,7 @@
                         <input class="file-path validate" type="text">
                     </div>
                 </div>
-                <div class="input-field col s6">
-                    <input type="text" name="name" class="validate">
-                    <label for="name">Song title</label>
-            </div>
+
                 <input id="submit_file" type="submit" value="Upload" class="waves-effect waves-light btn"><input>
             </form>
         </div>
