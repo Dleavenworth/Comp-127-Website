@@ -26,7 +26,7 @@ app.get('/', function(req, res) {
      db.collection("Songs").find({}).toArray(function(err, result) {
          if (err) {throw err}
          console.log(result)
-         res.render('index.ejs', {
+         res.render('index', {
              songs: result
          });
      })

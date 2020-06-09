@@ -8,6 +8,6 @@ function changeAudio(e) {
         var clickedItem = e.target.id;
         audioTag.src=""
         audioTag.src="/audio/" + clickedItem
-        alert(clickedItem);
+        console.log("Playing song: " + clickedItem);
     }
 }
