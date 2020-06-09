@@ -1,3 +1,4 @@
+//Redundant
 function postFunc(name, file) {
     console.log("postFunc:" + file)
     var form = new FormData();
