@@ -9,9 +9,9 @@
   </head>
   <body>
       <%- include('./partials/sidebar.ejs')%>
-   <main>
+    <div class="maincontent">
     <h1>Song playing?</h1>
-    <audio controls src="http://localhost:3005/audio/5ecdba02159fe345a429e718" type="audio/mp3">please</audio>
+    <audio controls src=<%="/audio/" + songs[0].songID %> type="audio/mp3">please</audio>
     <h1>List of songs on db: </h1>
     <table>
         <thead>
@@ -27,7 +27,13 @@
             <%})%>
         </tbody>
     </table>
-</main>
+</div>
+    <div class="z-depth-5 control">
+        <p>Control div</p>
+        <div class="progress">
+            <div class="determinate" style="width: 70%"></div>
+        </div>
+</div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {

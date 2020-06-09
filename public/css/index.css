@@ -1,5 +1,12 @@
-header, main, footer {
-    padding-left: 500px;
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+  .maincontent {
+      padding-left: 500px;
+      flex: 1 0 auto;
+      margin-bottom: 50px;
   }
 
   @media only screen and (max-width : 992px) {
@@ -7,3 +14,13 @@ header, main, footer {
       padding-left: 0;
     }
   }
+
+.control {
+    background-color:white;
+    position:fixed;
+    bottom:5px;
+    left:300px;
+    right:0px;
+    height:50px;
+    margin-bottom:0px;
+}

@@ -104,9 +104,7 @@ audioRoute.post('/add', (req, res) => {
     let album = req.body.album;
     let length = req.body.length;
 
-    db.collection('Songs').insertOne({"SongName": songName, "Artist": artist, "Album": album, "Length": length}, function(err) {
-        assert.equal(null, err);
-    })
+
 
     // Covert buffer to Readable Stream
     const readableTrackStream = new Readable();
@@ -120,6 +118,10 @@ audioRoute.post('/add', (req, res) => {
     let uploadStream = bucket.openUploadStream(songName);
     let id = uploadStream.id;
     readableTrackStream.pipe(uploadStream);
+
+    db.collection('Songs').insertOne({"SongName": songName, "Artist": artist, "Album": album, "Length": length, "songID": id}, function(err) {
+        assert.equal(null, err);
+    })
 
     uploadStream.on('error', () => {
       return res.status(500).json({ message: "Error uploading file" });
