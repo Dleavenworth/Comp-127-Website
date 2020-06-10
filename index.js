@@ -38,10 +38,9 @@ app.get('/upload', function(req, res) {
 //Mongo config
 let config = require('./config.json')
 let pass = config.password;
-const uri = "mongodb+srv://admin:" + pass + "@comp127musicplayer.lfnoa.mongodb.net/test?retryWrites=true&w=majority";
+const uri = "mongodb+srv://admin:" + pass + "@comp127musicplayer.lfnoa.mongodb.net/MusicPlayer?retryWrites=true&w=majority";
 
 // Connect Mongo Driver to MongoDB
-
 let db;
 MongoClient.connect(uri, {useUnifiedTopology: true}, (err, client) => {
   if (err) {

@@ -15,7 +15,7 @@ body {
     }
   }
 
-.control {
+.controlbar {
     background-color:white;
     position:fixed;
     bottom:5px;
@@ -23,4 +23,8 @@ body {
     right:0px;
     height:50px;
     margin-bottom:0px;
+}
+
+.controls {
+    text-align: center;
 }
