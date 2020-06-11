@@ -5,6 +5,17 @@ var audioTag = document.getElementById("audioelement");
 var playpause = document.getElementById("playpause");
 playpause.addEventListener("click", toggle)
 
+var prev = document.getElementById("previous");
+prev.addEventListener("click", prev);
+var next = document.getElementById("next");
+next.addEventListener("click", next);
+
+var progress = document.getElementById("progress");
+audioTag.addEventListener("timeupdate", update)
+
+
+
+
 function changeAudio(e) {
     if (e.target !== e.currentTarget) {
         console.log(e.target);
@@ -27,3 +38,27 @@ function toggle(e) {
             audioTag.pause();
         }
     }
+
+    function next(e) {
+        console.log("hit next button");
+        var active = element.querySelector('.active');
+        var next = active.nextElementSibling;
+        console.log(next);
+        audioTag.src=next.id;
+    }
+
+    function prev(e) {
+        console.log("hit previous button");
+        var active = element.querySelector('.active');
+        var prev = active.previousElementSibling;
+        var clickedItem = e.target;
+    }
+
+function update(e) {
+    console.log("time update")
+    var duration = audioTag.duration;
+    var curTime = audioTag.currentTime;
+    var currentPercent = (curTime/duration)*145;
+    console.log("width: " + currentPercent);
+    progress.style = "width: " + currentPercent + "%";
+}
