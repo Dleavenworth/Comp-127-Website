@@ -36,7 +36,7 @@ app.get('/upload', function(req, res) {
 })
 
 //Mongo config
-let config = require('./config.json')
+//let config = require('./config.json')
 let pass = "uop123"
 const uri = "mongodb+srv://normal:" + pass + "@comp127musicplayer.lfnoa.mongodb.net/MusicPlayer?retryWrites=true&w=majority";
 
