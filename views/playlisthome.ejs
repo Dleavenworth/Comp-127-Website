@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="/css/index.css">
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <%- include('./partials/sidebar.ejs')%>
+        <h1>Playlists:</h1>
+        <div class="maincontent">
+            <table id="songlist">
+                <thead>
+                    <tr>
+                        <th>Playlist name:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%playlists.forEach(function(playlist) {%>
+                    <tr>
+                        <th><%=playlist.PlaylistName%></th>
+                        <th><button><a href="playlist/<%=playlist._id%>">View/Edit</a></button></th>
+                        <th><button id="<%=playlist._id%>">Delete</button></th>
+                    <%})%>
+                </tbody>
+            </table>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="js/play.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+        });
+        </script>
+    </body>
+</html>

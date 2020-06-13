@@ -2,6 +2,8 @@
 const express = require('express');
 const audioRoute = express.Router();
 const indexRoute = express.Router();
+const searchRoute = express.Router();
+const playlistRoute = express.Router();
 const multer = require('multer');
 const path = require('path')
 const mongodb = require('mongodb');
@@ -21,9 +23,11 @@ app.use(express.urlencoded({
 }))
 app.use(express.static(__dirname + '/public'));
 app.use('/audio', audioRoute)
+app.use('/search', searchRoute)
+app.use('/playlist', playlistRoute)
 app.set('view engine', 'ejs')
-app.get('/', function(req, res) {
-     db.collection("Songs").find({}).toArray(function(err, result) {
+app.get('/', (req, res) => {
+     db.collection("Songs").find({}).toArray((err, result) => {
          if (err) {throw err}
          console.log(result)
          res.render('index', {
@@ -31,14 +35,35 @@ app.get('/', function(req, res) {
          });
      })
 });
-app.get('/upload', function(req, res) {
-    res.render('upload.ejs')
+app.get('/upload', (req, res) => {
+    res.render('upload.ejs');
+})
+app.get('/search', (req, res) => {
+    res.render('search.ejs');
+})
+
+app.get('/search/result', (req, res) => {
+    res.render('searchResults.ejs');
+})
+
+app.get('/playlist', (req, res) => {
+    db.collection("Playlists").find({}).toArray((err, result) => {
+        if (err) {throw err}
+        console.log(result)
+        res.render('playlisthome.ejs', {
+            playlists: result
+        });
+    })
+})
+
+app.get('/playlist/new', (req, res) => {
+    res.render('newplaylist.ejs');
 })
 
 //Mongo config
 //let config = require('./config.json')
-let pass = "uop123"
-const uri = "mongodb+srv://normal:" + pass + "@comp127musicplayer.lfnoa.mongodb.net/MusicPlayer?retryWrites=true&w=majority";
+let pass = "log32oft"
+const uri = "mongodb+srv://admin:" + pass + "@comp127musicplayer.lfnoa.mongodb.net/MusicPlayer?retryWrites=true&w=majority";
 
 // Connect Mongo Driver to MongoDB
 let db;
@@ -92,7 +117,7 @@ audioRoute.post('/add', (req, res) => {
       console.log(err)
     if (err) {
         console.log("Upload Request Validation Failed")
-        return res.status(400).json({ message: "Upload Request Validation Failed" });
+        return res.status(400).json({ message: "Upload Request Validation Failed, something is wrong with the file format, or size" });
     }   else if(!req.body.name) {
         console.log("No track name in request body")
         return res.status(400).json({ message: "No track name in request body" });
@@ -128,10 +153,64 @@ audioRoute.post('/add', (req, res) => {
 
     uploadStream.on('finish', () => {
         console.log("Stored under ID: " + id)
-      return res.status(201).json({ message: "File uploaded successfully, stored under Mongo ObjectID: " + id });
+      return res.status(201).json({ message: "File uploaded successfully"});
     });
   });
 });
+
+searchRoute.post('/result', (req, res) => {
+    console.log("in searchRoute post")
+    var query = req.body.query;
+    console.log(query)
+    db.collection("Songs").find({$text: {$search: query}}).toArray((err, result) => {
+        if (err) throw err
+        console.log(result)
+        res.render("searchResults.ejs", {
+            songs: result
+        })
+})
+})
+
+playlistRoute.post('/new', (req, res) => {
+    console.log("in playlistRoute post");
+    var name = req.body.playlistname;
+    db.collection("Playlists").insertOne({"PlaylistName": name, "Songs": []});
+    res.render("playlisthome.ejs");
+})
+
+playlistRoute.get('/:playlistID', (req,res) => {
+    return render(req, res);
+})
+
+async function render(req, res) {
+    res.render('playlistdisplay.ejs', {
+        songs: await getData(req)
+    })
+}
+
+function getData(req) {
+    return new Promise((resolve, reject) => {
+    var finalResult = [];
+    console.log("in the playlist route get");
+    var id = req.params.playlistID;
+    db.collection("Playlists").find({"_id": ObjectID(id)}).project({"Songs": 1}).toArray((err, outterResult) => {
+        if (err) throw err
+        console.log(outterResult[0].Songs)
+    for(var i = 0; i >= outterResult[0].Songs; i++) {
+        console.log(song);
+        db.collection("Songs").find({"_id": ObjectID(song)}).toArray((err, innerResult) => {
+            console.log(innerResult)
+            finalResult.push(innerResult);
+            console.log(typeof finalResult)
+            if(i == outterResult[0].Songs.length) {
+            resolve(finalResult)
+            console.log("Final result: " + finalResult);
+        }
+        })
+    }
+    })
+})
+}
 
 app.listen(process.env.PORT || 3005, () => {
   console.log("App listening on port 3005!");

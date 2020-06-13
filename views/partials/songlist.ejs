@@ -1,0 +1,18 @@
+<div class="maincontent">
+    <audio id="audioelement" type="audio/mp3">Your browser does not support the audio element.</audio>
+    <table id="songlist">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Length</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% console.log("songlist ejs file")
+            songs.forEach(function(song) {%>
+            <tr><th><button id="<%=song.songID%>" class="waves-effect waves-light btn"><%=song.SongName%></button></th><th><%=song.Artist%></th><th><%=song.Length%></th></tr>
+            <%})%>
+        </tbody>
+    </table>
+</div>

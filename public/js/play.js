@@ -12,17 +12,32 @@ next.addEventListener("click", next);
 
 var progress = document.getElementById("progress");
 audioTag.addEventListener("timeupdate", update)
+audioTag.addEventListener("play", update)
+audioTag.addEventListener("pause", update)
 
 
-
+// function handleControls(e) {
+//     if(e.type == "timeupdate" || e.type == "play" || e.type == "pause") {
+//         update(e);
+//     }
+//     else if(e.target.ID == "playpause") {
+//         toggle(e);
+//     }
+//     else if(e.target.ID == "previous") {
+//         prev(e);
+//     }
+//     else if(e.target.ID == "next") {
+//         next(e);
+//     }
+// }
 
 function changeAudio(e) {
     if (e.target !== e.currentTarget) {
-        console.log(e.target);
-        var clickedItem = e.target.id;
-        audioTag.src=""
-        audioTag.src="/audio/" + clickedItem
-        console.log("Playing song: " + clickedItem);
+            console.log(e.target);
+            var clickedItem = e.target.id;
+            audioTag.src=""
+            audioTag.src="/audio/" + clickedItem
+            console.log("Playing song: " + clickedItem);
     }
 }
 
@@ -33,7 +48,7 @@ function toggle(e) {
             clickedItem.innerHTML = "pause";
             audioTag.play();
         }
-        else {
+        else if(clickedItem.innerHTML == "pause") {
             clickedItem.innerHTML = "play_arrow"
             audioTag.pause();
         }
