@@ -62,8 +62,8 @@ app.get('/playlist/new', (req, res) => {
 
 //Mongo config
 //let config = require('./config.json')
-let pass = "log32oft"
-const uri = "mongodb+srv://admin:" + pass + "@comp127musicplayer.lfnoa.mongodb.net/MusicPlayer?retryWrites=true&w=majority";
+let pass = "123"
+const uri = "mongodb+srv://normal:" + pass + "@comp127musicplayer.lfnoa.mongodb.net/MusicPlayer?retryWrites=true&w=majority";
 
 // Connect Mongo Driver to MongoDB
 let db;
@@ -203,8 +203,8 @@ function getData(req) {
             finalResult.push(innerResult);
             console.log(typeof finalResult)
             if(i == outterResult[0].Songs.length) {
-            resolve(finalResult)
             console.log("Final result: " + finalResult);
+            resolve(finalResult)
         }
         })
     }
