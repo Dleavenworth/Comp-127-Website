@@ -5,31 +5,31 @@ const indexRoute = express.Router();
 const searchRoute = express.Router();
 const playlistRoute = express.Router();
 const multer = require('multer');
-const path = require('path')
+const path = require('path');
 const mongodb = require('mongodb');
 const MongoClient=require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 const assert = require('assert');
 
 //NodeJS Module Dependencies
-const { Readable } = require('stream')
+const { Readable } = require('stream');
 
 
 //Create express server and express router config
 const app = express();
-app.use(express.json())
+app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }))
 app.use(express.static(__dirname + '/public'));
-app.use('/audio', audioRoute)
-app.use('/search', searchRoute)
-app.use('/playlist', playlistRoute)
-app.set('view engine', 'ejs')
+app.use('/audio', audioRoute);
+app.use('/search', searchRoute);
+app.use('/playlist', playlistRoute);
+app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
      db.collection("Songs").find({}).toArray((err, result) => {
          if (err) {throw err}
-         console.log(result)
+         console.log(result);
          res.render('index', {
              songs: result
          });
@@ -49,7 +49,7 @@ app.get('/search/result', (req, res) => {
 app.get('/playlist', (req, res) => {
     db.collection("Playlists").find({}).toArray((err, result) => {
         if (err) {throw err}
-        console.log(result)
+        console.log(result);
         res.render('playlisthome.ejs', {
             playlists: result
         });
@@ -61,8 +61,8 @@ app.get('/playlist/new', (req, res) => {
 })
 
 //Mongo config
-//let config = require('./config.json')
-let pass = "uop"
+let config = require('./config.json');
+let pass = config.password;
 const uri = "mongodb+srv://normal:" + pass + "@comp127musicplayer.lfnoa.mongodb.net/MusicPlayer?retryWrites=true&w=majority";
 
 // Connect Mongo Driver to MongoDB
@@ -82,10 +82,10 @@ audioRoute.get('/:songID', (req, res) => {
     var songID = new ObjectID(req.params.songID);
   }
   catch(err){
-    return res.status(400).json({message:"Invalid trackID in URL parameter. Must be a single string of 12 bytes or 24 hex."})
+    return res.status(400).json({message:"Invalid trackID in URL parameter. Must be a single string of 12 bytes or 24 hex."});
   }
-  res.set('content-type', 'audio/mp3')
-  res.set('accept-ranges', 'bytes')
+  res.set('content-type', 'audio/mp3');
+  res.set('accept-ranges', 'bytes');
 
   let bucket = new mongodb.GridFSBucket(db, {
     bucketName: 'songs'
@@ -110,16 +110,16 @@ audioRoute.get('/:songID', (req, res) => {
  */
 audioRoute.post('/add', (req, res) => {
     console.log("in audioRoute post handler")
-    const storage = multer.memoryStorage()
+    const storage = multer.memoryStorage();
     const upload = multer({ storage: storage, limits: { fieldSize: 20000000, fileSize: 20000000, files: 1}});
     upload.single('song')(req, res, (err) => {
-      console.log(req)
-      console.log(err)
+      console.log(req);
+      console.log(err);
     if (err) {
-        console.log("Upload Request Validation Failed")
+        console.log("Upload Request Validation Failed");
         return res.status(400).json({ message: "Upload Request Validation Failed, something is wrong with the file format, or size" });
     }   else if(!req.body.name) {
-        console.log("No track name in request body")
+        console.log("No track name in request body");
         return res.status(400).json({ message: "No track name in request body" });
     }
 
@@ -152,19 +152,19 @@ audioRoute.post('/add', (req, res) => {
     });
 
     uploadStream.on('finish', () => {
-        console.log("Stored under ID: " + id)
+        console.log("Stored under ID: " + id);
       return res.status(201).json({ message: "File uploaded successfully"});
     });
   });
 });
 
 searchRoute.post('/result', (req, res) => {
-    console.log("in searchRoute post")
+    console.log("in searchRoute post");
     var query = req.body.query;
-    console.log(query)
+    console.log(query);
     db.collection("Songs").find({$text: {$search: query}}).toArray((err, result) => {
         if (err) throw err
-        console.log(result)
+        console.log(result);
         res.render("searchResults.ejs", {
             songs: result
         })
