@@ -62,7 +62,7 @@ app.get('/playlist/new', (req, res) => {
 
 //Mongo config
 //let config = require('./config.json')
-let pass = "123"
+let pass = "uop"
 const uri = "mongodb+srv://normal:" + pass + "@comp127musicplayer.lfnoa.mongodb.net/MusicPlayer?retryWrites=true&w=majority";
 
 // Connect Mongo Driver to MongoDB
